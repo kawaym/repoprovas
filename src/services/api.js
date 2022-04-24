@@ -15,7 +15,8 @@ async function createUser(user) {
 }
 
 async function login(user) {
-  await axios.post(`${BASE_URL}/`, { user });
+  const response = await axios.post(`${BASE_URL}/`, { user });
+  return response.data;
 }
 
 async function validateSession(token) {
