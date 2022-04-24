@@ -22,7 +22,6 @@ export default function SignUpForm() {
         confirmation: !showPassword.confirmation,
       });
     }
-    console.log(JSON.stringify(test));
   }
   const navigate = useNavigate();
   const formik = useFormik({

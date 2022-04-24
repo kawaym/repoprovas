@@ -25,10 +25,10 @@ export default function SignInForm() {
   useEffect(() => {
     if (userData && userData.token) {
       const promise = api.validateSession(userData.token);
-      promise.then(() => navigate("/timeline"));
+      promise.then(() => navigate("/mainpage"));
       promise.catch(() => {
         login({});
-        navigate("/mainpage");
+        navigate("/");
       });
     }
   }, []);
@@ -49,11 +49,11 @@ export default function SignInForm() {
     onSubmit: async (values) => {
       formik.setSubmitting(true);
       try {
-        await api.login({
+        const token = await api.login({
           email: values.email,
           password: values.password,
         });
-        login({ email: values.email, password: values.password });
+        login({ token });
         formik.setSubmitting(false);
         formik.setValues({ email: "", password: "" });
         navigate("/mainpage");
