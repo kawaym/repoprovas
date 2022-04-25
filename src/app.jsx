@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./contexts/userContext";
 import AuthPage from "./pages/AuthPage";
+import Dashboard from "./pages/Dashboard";
 
 import ResetStyle from "./styles/ResetStyle";
 
@@ -13,6 +14,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<AuthPage type="login" />} />
             <Route path="/signup" element={<AuthPage type="cadastro" />} />
+            <Route path="/dashboard/:target" element={<Dashboard />} />
             <Route
               path="*"
               element={
