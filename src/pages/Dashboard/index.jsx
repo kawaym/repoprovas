@@ -1,15 +1,20 @@
 import { Button, IconButton } from "@mui/material";
 import { Logout } from "@mui/icons-material";
 import { useParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import { ButtonGroup, Header, MainContent, VerticalLine } from "./styles";
 import Logo from "../../assets/images/Logo.png";
 import InfoGroup from "../../components/infogroup/InfoGroup";
 import SearchBar from "../../components/searchbar/SearchBar";
+import UserContext from "../../contexts/userContext";
+import { api } from "../../services/api";
 
 export default function Dashboard() {
   const { target } = useParams();
   const navigate = useNavigate();
+
+  const { userData, login } = useContext(UserContext);
 
   const test = {
     title: "10 periodo",
@@ -102,13 +107,25 @@ export default function Dashboard() {
     ],
   };
 
+  async function handleLogout() {
+    const { token } = userData;
+
+    try {
+      await api.logout(token);
+      login({});
+      navigate("/");
+    } catch {
+      alert("Erro");
+    }
+  }
+
   return (
     <>
       <Header>
         <div>
           <img src={Logo} alt="Logotipo do site" />
           <IconButton aria-label="logout">
-            <Logout />
+            <Logout onClick={() => handleLogout()} />
           </IconButton>
         </div>
         <div>

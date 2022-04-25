@@ -25,4 +25,9 @@ async function validateSession(token) {
   return response.data;
 }
 
-export const api = { createUser, login, validateSession };
+async function logout(token) {
+  const config = createConfig(token);
+  await axios.delete(`${BASE_URL}/dashboard`, config);
+}
+
+export const api = { createUser, login, validateSession, logout };

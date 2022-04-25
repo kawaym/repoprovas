@@ -25,7 +25,7 @@ export default function SignInForm() {
   useEffect(() => {
     if (userData && userData.token) {
       const promise = api.validateSession(userData.token);
-      promise.then(() => navigate("/mainpage"));
+      promise.then(() => navigate("/dashboard/disciplines"));
       promise.catch(() => {
         login({});
         navigate("/");
@@ -105,7 +105,7 @@ export default function SignInForm() {
           variant="text"
           type="button"
           sx={{ textDecoration: "underline" }}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/signup")}
         >
           Não possuo cadastro
         </Button>
